@@ -43,7 +43,7 @@ void main(){
 	}
 		
 	
-	printf(" between merged array is ");
+	printf(" Between merged array is ");
 	for(i=0;i<x;i++){
 		printf("%d ",d[i]);
 	}
