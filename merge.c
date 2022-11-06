@@ -43,7 +43,7 @@ void main(){
 	}
 		
 	
-	printf(" Sort merged array is ");
+	printf(" between merged array is ");
 	for(i=0;i<x;i++){
 		printf("%d ",d[i]);
 	}
