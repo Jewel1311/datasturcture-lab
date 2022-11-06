@@ -2,9 +2,9 @@
 #include <stdlib.h>
 int stack[50],i,j,choice=0,n,top=-1;
 void push();
-void pop()
+void pop();
 void traversal();  
-void main ()  
+void main()  
 {  
     printf("Enter the max size of stack : ");
     scanf("%d", &n);
