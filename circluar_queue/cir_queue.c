@@ -12,8 +12,10 @@ void enqueue(){
     else{
         printf("Enter the element : ");
         scanf("%d", &n);
-        if (rear == -1 && front == -1)
-           rear = front = 0; 
+        if (rear == -1 && front == -1){
+            rear = 1;
+            front = 1; 
+        }
         else
             rear = (rear%max)+1;
         q[rear] = n;
@@ -28,7 +30,8 @@ void dequeue(){
     }
     else if(front == rear){
         temp = q[front];
-        front = rear = -1;
+        front = -1;
+        rear = -1;
     }
     else{
         temp = q[front];
@@ -47,7 +50,7 @@ void traversal(){
         for(int i=front; i<=max; i++ ){
             printf("%d\n", q[i]);
         }
-        for(int i=0; i<=rear; i++){
+        for(int i=1; i<=rear; i++){
             printf("%d\n",q[i]);
         }
 
