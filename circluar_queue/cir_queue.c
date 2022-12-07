@@ -13,22 +13,34 @@ void enqueue(){
         printf("Enter the element : ");
         scanf("%d", &n);
         if (rear == -1 && front == -1)
-           rear = front = 1; 
+           rear = front = 0; 
         else
-            rear++;
+            rear = (rear%max)+1;
         q[rear] = n;
     }
 
 }
 
 void dequeue(){
-
+    int temp;
+    if (front == -1){
+        printf("\nQueue is empty");
+    }
+    else if(front == rear){
+        temp = q[front];
+        front = rear = -1;
+    }
+    else{
+        temp = q[front];
+        front = (front%max)+1;
+    }
+    printf("%d is deleted",temp);
 }
 
 void traversal(){
     if(front < rear){
         for(int i = front; i<=rear; i++){
-            printf("%d",q[i]);
+            printf("%d\n",q[i]);
         }
     }
     else{
