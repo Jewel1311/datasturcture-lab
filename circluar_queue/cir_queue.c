@@ -41,7 +41,7 @@ void dequeue(){
 }
 
 void traversal(){
-    if(front < rear){
+    if(front <= rear){
         for(int i = front; i<=rear; i++){
             printf("%d\n",q[i]);
         }
