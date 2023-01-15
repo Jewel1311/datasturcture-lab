@@ -6,7 +6,7 @@ struct node{
     struct node *left, *right;
 };
 
-struct node *newnode, *temp, *root = NULL, *prev, *prev1, *in;
+struct node *newnode, *temp, *root = NULL, *prev, *prev1, *inp, *ins;
 
 void insert(){
     int n;
@@ -39,40 +39,51 @@ void insert(){
     }
 }
 
-// struct node* inOrderPredecessor(struct node* rt){
-//     rt = rt->left;
-//     while(rt->right != NULL){
-//         rt = rt->right;
-//     }
-//     return rt;
-// }
+struct node* inorderpredecessor(struct node* root){
+    root = root->left;
+    while(root->right != NULL){
+        root = root->right;
+    }
+    return root;
+}
 
-struct node *deleteNode(struct node *root, int value){
+struct node* inordersuccessor(struct node* root){
+    root = root->right;
+    while(root->left != NULL){
+        root = root->left;
+    }
+    return root;
+}
 
-//     struct node* iPre;
-//     if (root == NULL){
-//         return NULL;
-//     }
-//     if (root->left==NULL&&root->right==NULL){
-//         free(root);
-//         return NULL;
-//     }
+struct node* delete(struct node* root, int n){
+    if(root == NULL){
+        return NULL;
+    }
+    if( root->left == NULL && root->right == NULL){
+        free(root);
+        return NULL;
+    }
 
-//     //searching for the node to be deleted
-//     if (value < root->data){
-//         root-> left = deleteNode(root->left,value);
-//     }
-//     else if (value > root->data){
-//         root-> right = deleteNode(root->right,value);
-//     }
-//     //deletion strategy when the node is found
-//     else{
-//         iPre = inOrderPredecessor(root);
-//         root->data = iPre->data;
-//         root->left = deleteNode(root->left, iPre->data);
-//     }
-//     return root;
-// }
+    if(n < root->data){
+        root->left = delete(root->left,n);
+    }
+    else if(n > root->data){
+        root->right = delete(root->right,n);
+    }
+    else{
+        if(root->left != NULL){
+            inp = inorderpredecessor(root);
+            root->data = inp->data;
+            root->left = delete(root->left,inp->data);
+        }
+        else if(root->right != NULL){
+            ins = inordersuccessor(root);
+            root->data = ins->data;
+            root->right = delete(root->right, ins->data);
+        }
+    }
+    return root;
+}
 
 void inorder(struct node *rt){
     if(rt == NULL)
@@ -110,7 +121,7 @@ void main(){
                     break;
             case 2:  printf("Enter the node to delete : ");
                     scanf("%d",&n);
-                    deleteNode(root, n);
+                    delete(root, n);
                     break;
             case 3: inorder(root);
                     break; 
