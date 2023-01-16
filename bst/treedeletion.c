@@ -6,7 +6,7 @@ struct node{
     struct node *left, *right;
 };
 
-struct node *newnode, *temp, *root = NULL, *prev, *prev1, *inp, *ins;
+struct node *newnode, *temp, *root = NULL, *prev, *prev1, *inp, *child;
 
 void insert(){
     int n;
@@ -47,13 +47,6 @@ struct node* inorderpredecessor(struct node* root){
     return root;
 }
 
-struct node* inordersuccessor(struct node* root){
-    root = root->right;
-    while(root->left != NULL){
-        root = root->left;
-    }
-    return root;
-}
 
 struct node* delete(struct node* root, int n){
     if(root == NULL){
@@ -71,15 +64,14 @@ struct node* delete(struct node* root, int n){
         root->right = delete(root->right,n);
     }
     else{
-        if(root->left != NULL){
+        if(root->left != NULL && root->right !=NULL){
             inp = inorderpredecessor(root);
             root->data = inp->data;
             root->left = delete(root->left,inp->data);
         }
-        else if(root->right != NULL){
-            ins = inordersuccessor(root);
-            root->data = ins->data;
-            root->right = delete(root->right, ins->data);
+        else {
+            child = root->right ? root->right : root->left;
+            root = child;
         }
     }
     return root;
